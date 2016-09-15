@@ -1,3 +1,32 @@
-<p>
-  Home Works!
-</p>
+<div class="container">
+  <div class="row">
+    <div class="col-md-8">
+      <textarea class="form-control" #textarea placeholder="ESCRIBE AQUI" cols="100" rows="10">Los tomates están muy ricos pero son muy caros.</textarea>
+    </div>
+    <div class="col-md-4">
+      <button (click)="sendAnalysis(textarea.value)">ANALIZAR</button>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-12">
+      <div *ngIf="result">
+        <p>Computation time:{{result.computationTime}}</p>
+        <p>Status msg:{{result.statusMsg}}</p>
+        <p>Analyzed text:{{result.text.content}}</p>
+        <p>Language:{{result.text.language}}</p>
+        <hr/>
+        <div *ngFor="let sentence of result.text.sentences">
+          SENTENCE {{sentence.number}}<br/>
+          Sentence text: {{sentence.content}}<br/>
+          Sentence topics: <span *ngFor="let topic of sentence.topics">
+            <em class="label label-default">{{topic.name}}</em> </span><br/>
+          <div style="font-size:large">
+          <span *ngFor="let token of sentence.tokens">
+            <em style="text-decoration: underline;" [style.color]="getTokenStyle(token)">{{token.form}}</em>
+          </span>
+        </div>
+      </div>
+      </div>
+    </div>
+  </div>
+</div>
