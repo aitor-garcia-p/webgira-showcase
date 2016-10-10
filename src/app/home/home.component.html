@@ -1,10 +1,10 @@
 <div class="container">
   <div class="row">
     <div class="col-md-12">
-      <h3>Text analysis demo:</h3>
-      <textarea class="form-control" #textarea placeholder="ESCRIBE AQUI" width="100%" rows="4">Los tomates están muy ricos pero son muy caros.</textarea>
+      <h3>Prueba de análisis de texto:</h3>
+      <textarea class="form-control" #textarea placeholder="Escribe un texto de prueba aquí" width="100%" rows="4">Los muy elegantes pero son muy caros.</textarea>
       <!-- <button (click)="sendAnalysis(textarea.value)">ANALIZAR</button> -->
-      <button type="button" class="btn btn-primary btn-lg" (click)="sendAnalysis(textarea.value)" style="margin-top:5px;">ANALYSE</button>
+      <button type="button" class="btn btn-primary btn-lg" (click)="sendAnalysis(textarea.value)" style="margin-top:5px;">ANALIZAR</button>
     </div>
     <!-- <div class="col-md-4">
       <button (click)="sendAnalysis(textarea.value)">ANALIZAR</button>
@@ -15,7 +15,7 @@
       <!-- RESULTS IF ANY (COULD BE GOOD TO PUT INTO ITS OWN COMPONENT/TEMPLATE)-->
       <div *ngIf="result">
         <hr/>
-        <h3>Analysis results:</h3>
+        <h3>Resultados del análisis:</h3>
         <div class="container-fluid">
           <div class="row">
 
@@ -26,10 +26,10 @@
 
                 <tbody>
                   <tr>
-                    <th colspan="2" style="text-align: center;">ANALYSIS METADATA</th>
+                    <th colspan="2" style="text-align: center;">Datos del proceso de análisis</th>
                   </tr>
                   <tr>
-                    <th>Computation time:</th>
+                    <th>Tiempo de cómputo:</th>
                     <td>{{result.computationTime}} milliseconds</td>
                   </tr>
                   <tr>
@@ -37,11 +37,11 @@
                     <td>{{result.statusMsg}}</td>
                   </tr>
                   <tr>
-                    <th>Analyzed text:</th>
+                    <th>Texto analizado:</th>
                     <td>{{result.text.content}}</td>
                   </tr>
                   <tr>
-                    <th>Language:</th>
+                    <th>Idioma:</th>
                     <td>{{result.text.language}}</td>
                   </tr>
                 </tbody>
@@ -53,7 +53,7 @@
 
               <div class="panel panel-info" *ngFor="let sentence of result.text.sentences">
                 <div class="panel-heading">
-                  <strong>Sentence number: {{sentence.number}}</strong>
+                  <strong>Número de frase: {{sentence.number}}</strong>
                 </div>
                 <div class="panel-body">
 
@@ -61,18 +61,18 @@
 
                     <tbody>
                       <tr>
-                        <th>Text:</th>
+                        <th>Texto:</th>
                         <td>{{sentence.content}}</td>
                       </tr>
                       <tr>
-                        <th>Detected categories:</th>
+                        <th>Categorías/Temas detectados:</th>
                         <td><span *ngFor="let topic of sentence.topics" style="font-size:large">
               <em class="label label-warning">{{topic.name}}</em> </span></td>
                       </tr>
-                      <tr>
-                        <th>Analyzed text:</th>
+                      <!-- <tr>
+                        <th>Texto de la frase:</th>
                         <td>{{result.text.content}}</td>
-                      </tr>
+                      </tr> -->
                       <tr>
                         <td colspan="2" style="font-weight:bolder;font-size:large"><span *ngFor="let token of sentence.tokens">
             <em style="text-decoration: underline;" [style.color]="getTokenStyle(token)">{{token.form}}</em>

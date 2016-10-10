@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 
 import { ApiService } from '../shared/api.service';
 
-import {AnalysisResponse,Token }from '../model/analysis-response';
+// import {AnalysisResponse, Token }from '../model/analysis-response';
 
 @Component({
   selector: 'my-dictionaries',
@@ -11,16 +11,32 @@ import {AnalysisResponse,Token }from '../model/analysis-response';
 })
 export class DictionariesComponent implements OnInit {
 
-private result:AnalysisResponse;
+  // private msg="yes, this is";
 
-private msg="yes, this is";
+  private multiwords = [];
+  private negations = [];
+  private polaritywords;
+  private topics = [];
 
-  constructor(private apiService:ApiService) {
+  private polaritywordsLoading: boolean;
+
+
+  constructor(private apiService: ApiService) {
     // Do stuff
   }
 
   ngOnInit() {
     console.log('Hello Dictionaries');
+    this.apiService.getConfiguredMultiwords('es').subscribe(r => this.multiwords = r);
+    this.apiService.getConfiguredNegations('es').subscribe(r => this.negations = r);
+    this.apiService.getConfiguredTopics('es').subscribe(r => this.topics = r);
+    this.polaritywordsLoading = true;
+    this.apiService.getConfiguredPolarities('es').subscribe(r => this.loadPolarityWords(r));
+  }
+
+  loadPolarityWords(r: any[]) {
+    this.polaritywords = r;
+    this.polaritywordsLoading = false;
   }
 
 }

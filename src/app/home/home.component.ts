@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 
 import { ApiService } from '../shared/api.service';
 
-import {AnalysisResponse,Token }from '../model/analysis-response';
+import {AnalysisResponse, Token }from '../model/analysis-response';
 
 @Component({
   selector: 'my-home',
@@ -11,9 +11,9 @@ import {AnalysisResponse,Token }from '../model/analysis-response';
 })
 export class HomeComponent implements OnInit {
 
-private result:AnalysisResponse;
+  private result: AnalysisResponse;
 
-  constructor(private apiService:ApiService) {
+  constructor(private apiService: ApiService) {
     // Do stuff
   }
 
@@ -21,19 +21,19 @@ private result:AnalysisResponse;
     console.log('Hello Home');
   }
 
-  sendAnalysis(text:string){
-    console.log("sending to analyze: "+text);
-    this.apiService.analyze(text).subscribe(res=>this.result=res);
+  sendAnalysis(text: string) {
+    console.log('sending to analyze: ' + text);
+    this.apiService.analyze(text).subscribe(res => this.result = res);
   }
 
-getTokenStyle(token:Token):string{
-  if(token.polarityValue.value>0){
-    return "green";
-  }else if(token.polarityValue.value<0){
-    return "red";
-  }else{
-    return "grey";
+  getTokenStyle(token: Token): string {
+    if (token.polarityValue.value > 0) {
+      return 'green';
+    } else if (token.polarityValue.value < 0) {
+      return 'red';
+    } else {
+      return 'grey';
+    }
   }
-}
 
 }
