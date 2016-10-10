@@ -9,24 +9,51 @@
   </div>
   <div class="row">
     <div class="col-md-12">
+      <!-- RESULTS IF ANY (COULD BE GOOD TO PUT INTO ITS OWN COMPONENT/TEMPLATE)-->
       <div *ngIf="result">
-        <p>Computation time:{{result.computationTime}}</p>
-        <p>Status msg:{{result.statusMsg}}</p>
-        <p>Analyzed text:{{result.text.content}}</p>
-        <p>Language:{{result.text.language}}</p>
         <hr/>
-        <div *ngFor="let sentence of result.text.sentences">
-          SENTENCE {{sentence.number}}<br/>
-          Sentence text: {{sentence.content}}<br/>
-          Sentence topics: <span *ngFor="let topic of sentence.topics">
+        <div class="container-fluid">
+          <div class="row">
+
+            <div class="col-md-4">
+
+
+              <table class="table table-condensed">
+
+              <tbody>
+              <tr>
+              <th>Computation time:</th><td>{{result.computationTime}} milliseconds</td>
+              </tr>
+              <tr>
+              <th>Status message:</th><td>{{result.statusMsg}}</td>
+              </tr>
+              <tr>
+              <th>Analyzed text:</th><td>{{result.text.content}}</td>
+              </tr>
+              <tr>
+              <th>Language:</th><td>{{result.text.language}}</td>
+              </tr>
+            </tbody>
+              </table>
+
+            </div>
+
+            <div class="col-md-8">
+              <div *ngFor="let sentence of result.text.sentences">
+                SENTENCE {{sentence.number}}<br/> Sentence text: {{sentence.content}}<br/> Sentence topics: <span *ngFor="let topic of sentence.topics">
             <em class="label label-default">{{topic.name}}</em> </span><br/>
-          <div style="font-size:large">
-          <span *ngFor="let token of sentence.tokens">
+                <div style="font-size:large">
+                  <span *ngFor="let token of sentence.tokens">
             <em style="text-decoration: underline;" [style.color]="getTokenStyle(token)">{{token.form}}</em>
           </span>
+                </div>
+              </div>
+            </div>
+
+          </div>
         </div>
       </div>
-      </div>
+      <!-- END RESULTS -->
     </div>
   </div>
 </div>
