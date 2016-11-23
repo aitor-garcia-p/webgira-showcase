@@ -5,6 +5,7 @@ import { Headers, Http, Response } from '@angular/http';
 import { Observable }        from 'rxjs/Observable';
 
 import {AnalysisResponse} from '../model/analysis-response';
+import {NNAnalysisResponse} from '../model/nn-analysis-response';
 
 @Injectable()
 export class ApiService {
@@ -15,11 +16,15 @@ export class ApiService {
 
   private HOST = 'http://localhost:8082';
 
+  private HOST_NN='http://localhost:8091';
+
   private analysisUrl = this.HOST + '/webgira/absa';
   private multiwordsUrl = this.HOST + '/webgira/config/{lang}/multiwords';
   private negationsUrl = this.HOST + '/webgira/config/{lang}/negations';
   private polaritiesUrl = this.HOST + '/webgira/config/{lang}/sentiments';
   private topicsUrl = this.HOST + '/webgira/config/{lang}/topics';
+
+  private nnAnalysisUrl= this.HOST_NN+'/nn-demos/annotate';
 
   constructor(private http: Http) { }
 
@@ -43,6 +48,10 @@ export class ApiService {
 
   getConfiguredTopics(lang: string): Observable<any[]> {
     return this.http.get(this.topicsUrl.replace('{lang}', lang)).map((r: Response) => r.json() as any[]);
+  }
+
+  analyzeByNN(text:string):Observable<NNAnalysisResponse>{
+    return this.http.get(this.nnAnalysisUrl+'?text='+text).map((r:Response)=> r.json() as NNAnalysisResponse);
   }
 
 }

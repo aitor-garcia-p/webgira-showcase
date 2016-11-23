@@ -10,6 +10,8 @@ import { AboutComponent } from './about/about.component';
 import { ApiService } from './shared';
 import { routing } from './app.routing';
 
+import { NnAnalysisComponent } from './nn-analysis/nn-analysis.component';
+
 import { removeNgStyles, createNewHosts } from '@angularclass/hmr';
 
 @NgModule({
@@ -23,7 +25,8 @@ import { removeNgStyles, createNewHosts } from '@angularclass/hmr';
     AppComponent,
     HomeComponent,
     DictionariesComponent,
-    AboutComponent
+    AboutComponent,
+    NnAnalysisComponent
   ],
   providers: [
     ApiService

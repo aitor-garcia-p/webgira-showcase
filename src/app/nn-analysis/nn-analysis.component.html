@@ -1,0 +1,13 @@
+
+
+<h4>NN stuff here</h4>
+
+<textarea #mytextarea [(ngModel)]="textToAnalyze"></textarea>
+
+<button (click)="analyzeByNN()">Analyze</button>
+
+<div *ngIf="nnResult" class="well">
+<span  *ngFor="let tokenInfo of nnResult.tokensInfo">
+<em style="text-decoration: underline;" [style.color]="getTokenStyle(tokenInfo)">{{tokenInfo.token}}</em>
+</span>
+</div>
