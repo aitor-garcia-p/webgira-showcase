@@ -50,8 +50,8 @@ export class ApiService {
     return this.http.get(this.topicsUrl.replace('{lang}', lang)).map((r: Response) => r.json() as any[]);
   }
 
-  analyzeByNN(text:string):Observable<NNAnalysisResponse>{
-    return this.http.get(this.nnAnalysisUrl+'?text='+text).map((r:Response)=> r.json() as NNAnalysisResponse);
+  analyzeByNN(text:string):Observable<NNAnalysisResponse[]>{
+    return this.http.get(this.nnAnalysisUrl+'?text='+text).map((r:Response)=> r.json() as NNAnalysisResponse[]);
   }
 
 }

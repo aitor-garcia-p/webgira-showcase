@@ -2,12 +2,15 @@
 
 <h4>NN stuff here</h4>
 
-<textarea #mytextarea [(ngModel)]="textToAnalyze"></textarea>
+<textarea cols="120" rows="10" #mytextarea [(ngModel)]="textToAnalyze" (keyup)="currentTextSubject.next(mytextarea.value)"></textarea>
 
-<button (click)="analyzeByNN()">Analyze</button>
+<!-- <button (click)="analyzeByNN()">Analyze</button> -->
 
-<div *ngIf="nnResult" class="well">
+<div *ngIf="nnResults" class="well">
+  <div *ngFor="let nnResult of nnResults">
 <span  *ngFor="let tokenInfo of nnResult.tokensInfo">
 <em style="text-decoration: underline;" [style.color]="getTokenStyle(tokenInfo)">{{tokenInfo.token}}</em>
-</span>
+<i *ngIf="tokenInfo.entity!=='N'" [style.color]="getEntityStyle(tokenInfo)">({{tokenInfo.entity}})</i>
+</span><br/>
+</div>
 </div>
