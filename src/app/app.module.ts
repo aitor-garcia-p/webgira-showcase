@@ -11,6 +11,7 @@ import { ApiService } from './shared';
 import { routing } from './app.routing';
 
 import { NnAnalysisComponent } from './nn-analysis/nn-analysis.component';
+import { FurnitureNnAnalysisComponent } from './furniture-nn-analysis/furniture-nn-analysis.component';
 
 import { removeNgStyles, createNewHosts } from '@angularclass/hmr';
 
@@ -26,7 +27,8 @@ import { removeNgStyles, createNewHosts } from '@angularclass/hmr';
     HomeComponent,
     DictionariesComponent,
     AboutComponent,
-    NnAnalysisComponent
+    NnAnalysisComponent,
+    FurnitureNnAnalysisComponent
   ],
   providers: [
     ApiService

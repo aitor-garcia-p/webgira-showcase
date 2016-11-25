@@ -1,0 +1,13 @@
+
+
+<h4>NN stuff here</h4>
+
+<textarea cols="120" rows="10" #mytextarea [(ngModel)]="textToAnalyze" (keyup)="currentTextSubject.next(mytextarea.value)"></textarea>
+
+<!-- <button (click)="analyzeByNN()">Analyze</button> -->
+
+<div *ngIf="nnResults" class="well">
+  <div *ngFor="let nnResult of nnResults">
+<strong [style.color]="chooseColor(nnResult)">{{nnResult}}</strong>
+</div>
+</div>

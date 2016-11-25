@@ -25,6 +25,7 @@ export class ApiService {
   private topicsUrl = this.HOST + '/webgira/config/{lang}/topics';
 
   private nnAnalysisUrl= this.HOST_NN+'/nn-demos/annotate';
+  private furnitureNnAnalysisUrl= this.HOST_NN+'/furniture-nn-demos/annotate';
 
   constructor(private http: Http) { }
 
@@ -52,6 +53,10 @@ export class ApiService {
 
   analyzeByNN(text:string):Observable<NNAnalysisResponse[]>{
     return this.http.get(this.nnAnalysisUrl+'?text='+text).map((r:Response)=> r.json() as NNAnalysisResponse[]);
+  }
+
+  analyzeByFurnitureNN(text:string):Observable<string[]>{
+    return this.http.get(this.furnitureNnAnalysisUrl+'?text='+text).map((r:Response)=> r.json() as string[]);
   }
 
 }
