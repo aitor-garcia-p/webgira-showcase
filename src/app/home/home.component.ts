@@ -26,13 +26,21 @@ export class HomeComponent implements OnInit {
     this.apiService.analyze(text).subscribe(res => this.result = res);
   }
 
-  getTokenStyle(token: Token): string {
+  getTokenColor(token: Token): string {
     if (token.polarityValue.value > 0) {
       return 'green';
     } else if (token.polarityValue.value < 0) {
       return 'red';
     } else {
       return 'grey';
+    }
+  }
+
+  getTokenDecoration(token: Token): string {
+    if(token.negated){
+      return 'overline';
+    }else{
+      return 'underline';
     }
   }
 

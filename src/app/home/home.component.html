@@ -75,7 +75,7 @@
                       </tr> -->
                       <tr>
                         <td colspan="2" style="font-weight:bolder;font-size:large"><span *ngFor="let token of sentence.tokens">
-            <em style="text-decoration: underline;" [style.color]="getTokenStyle(token)">{{token.form}}</em>
+            <em [style.text-decoration]="getTokenDecoration(token)" [style.color]="getTokenColor(token)">{{token.form}}</em>
           </span></td>
                       </tr>
                     </tbody>
