@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { Headers, Http, Response } from '@angular/http';
 
 import { Observable }        from 'rxjs/Observable';
+import 'rxjs/add/operator/map';
 
 import {AnalysisResponse} from '../model/analysis-response';
 import {NNAnalysisResponse} from '../model/nn-analysis-response';

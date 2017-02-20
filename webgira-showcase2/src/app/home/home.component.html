@@ -1,0 +1,97 @@
+<div class="container">
+  <div class="row">
+    <div class="col-md-12">
+      <h3>Prueba de análisis de texto:</h3>
+      <textarea class="form-control" #textarea placeholder="Escribe un texto de prueba aquí" width="100%" rows="4">Los muebles son muy elegantes pero son muy caros.</textarea>
+      <!-- <button (click)="sendAnalysis(textarea.value)">ANALIZAR</button> -->
+      <button type="button" class="btn btn-primary btn-lg" (click)="sendAnalysis(textarea.value)" style="margin-top:5px;">ANALIZAR</button>
+    </div>
+    <!-- <div class="col-md-4">
+      <button (click)="sendAnalysis(textarea.value)">ANALIZAR</button>
+    </div> -->
+  </div>
+  <div class="row">
+    <div class="col-md-12">
+      <!-- RESULTS IF ANY (COULD BE GOOD TO PUT INTO ITS OWN COMPONENT/TEMPLATE)-->
+      <div *ngIf="result">
+        <hr/>
+        <h3>Resultados del análisis:</h3>
+        <div class="container-fluid">
+          <div class="row">
+
+            <div class="col-md-4">
+
+
+              <table class="table table-condensed">
+
+                <tbody>
+                  <tr>
+                    <th colspan="2" style="text-align: center;">Datos del proceso de análisis</th>
+                  </tr>
+                  <tr>
+                    <th>Tiempo de cómputo:</th>
+                    <td>{{result.computationTime}} milliseconds</td>
+                  </tr>
+                  <tr>
+                    <th>Status message:</th>
+                    <td>{{result.statusMsg}}</td>
+                  </tr>
+                  <tr>
+                    <th>Texto analizado:</th>
+                    <td>{{result.text.content}}</td>
+                  </tr>
+                  <tr>
+                    <th>Idioma:</th>
+                    <td>{{result.text.language}}</td>
+                  </tr>
+                </tbody>
+              </table>
+
+            </div>
+
+            <div class="col-md-8">
+
+              <div class="panel panel-info" *ngFor="let sentence of result.text.sentences">
+                <div class="panel-heading">
+                  <strong>Número de frase: {{sentence.number}}</strong>
+                </div>
+                <div class="panel-body">
+
+                  <table class="table table-condensed">
+
+                    <tbody>
+                      <tr>
+                        <th>Texto:</th>
+                        <td>{{sentence.content}}</td>
+                      </tr>
+                      <tr>
+                        <th>Categorías/Temas detectados:</th>
+                        <td><span *ngFor="let topic of sentence.topics" style="font-size:large">
+              <em class="label label-warning">{{topic.name}}</em> </span></td>
+                      </tr>
+                      <!-- <tr>
+                        <th>Texto de la frase:</th>
+                        <td>{{result.text.content}}</td>
+                      </tr> -->
+                      <tr>
+                        <td colspan="2" style="font-weight:bolder;font-size:large"><span *ngFor="let token of sentence.tokens">
+            <em [style.text-decoration]="getTokenDecoration(token)" [style.color]="getTokenColor(token)">{{token.form}}</em>
+          </span></td>
+                      </tr>
+                    </tbody>
+                  </table>
+
+                </div>
+              </div>
+
+
+
+            </div>
+
+          </div>
+        </div>
+      </div>
+      <!-- END RESULTS -->
+    </div>
+  </div>
+</div>

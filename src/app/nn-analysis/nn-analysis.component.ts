@@ -17,8 +17,8 @@ export class NnAnalysisComponent implements OnInit {
   private textToAnalyze: string = "la comida estaba buena";
   private nnResults: NNAnalysisResponse[];
 
-private currentTextSubject = new Subject<string>();
-private nnResultObservable:Observable<NNAnalysisResponse[]>;
+  private currentTextSubject = new Subject<string>();
+  private nnResultObservable: Observable<NNAnalysisResponse[]>;
 
   constructor(private apiService: ApiService) {
     // Do stuff
@@ -31,7 +31,7 @@ private nnResultObservable:Observable<NNAnalysisResponse[]>;
       .distinctUntilChanged()   // ignore if next search term is same as previous
       .switchMap(text => text   // switch to new observable each time
         // return the http search observable
-        ?   this.apiService.analyzeByNN(encodeURIComponent(this.textToAnalyze))
+        ? this.apiService.analyzeByNNFurniture(encodeURIComponent(this.textToAnalyze))
         // or the observable of empty heroes if no search term
         : Observable.of<NNAnalysisResponse>())
       .catch(error => {
@@ -39,13 +39,13 @@ private nnResultObservable:Observable<NNAnalysisResponse[]>;
         console.log(error);
         return Observable.of<NNAnalysisResponse>();
       });
-      this.nnResultObservable.subscribe(r=>this.nnResults=r);
+    this.nnResultObservable.subscribe(r => this.nnResults = r);
   }
 
   getTokenStyle(tokenInfo: TokenInfo): string {
 
     // console.log(">>>>>>>>>>>" + JSON.stringify(tokenInfo));
-    if (tokenInfo.aspectTerm || tokenInfo.entity!=='N' || tokenInfo.attribute!=='N' || tokenInfo.polarity!=='N'){
+    if (tokenInfo.aspectTerm || tokenInfo.entity !== 'N' || tokenInfo.attribute !== 'N' || tokenInfo.polarity !== 'N') {
       return 'blue';
     } else {
       return 'black';
@@ -54,17 +54,23 @@ private nnResultObservable:Observable<NNAnalysisResponse[]>;
   }
 
   getEntityStyle(tokenInfo: TokenInfo): string {
-    switch(tokenInfo.entity){
+    switch (tokenInfo.entity) {
       case 'FOOD': return 'red';
       case 'SERVICE': return 'orange';
       case 'AMBIENCE': return 'purple';
+      // FOR furnitureNnAnalysisUrl
+      case 'furniture': return 'purple';
+      case 'accesories': return 'green';
+      case 'kitchen': return 'brown';
+      case 'rooms': return 'orange'
+      ///////////////////////////////
       default: return 'silver';
     }
   }
 
   analyzeByNN() {
     console.log("Analysis click");
-    this.apiService.analyzeByNN(encodeURIComponent(this.textToAnalyze)).subscribe(r => this.nnResults = r);
+    this.apiService.analyzeByNNFurniture(encodeURIComponent(this.textToAnalyze)).subscribe(r => this.nnResults = r);
   }
 
 }

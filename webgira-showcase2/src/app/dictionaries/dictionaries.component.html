@@ -1,0 +1,51 @@
+<h4>Dictionaries configuration</h4>
+
+<div clas="container-fluid">
+
+  <div class="row">
+
+    <div class="col-md-3">
+      <h4>Multiwords:</h4>
+      <ul class="list-group my-y-scrollable">
+        <li class="list-group-item" *ngFor="let word of multiwords">
+          {{word}}
+        </li>
+      </ul>
+    </div>
+
+    <div class="col-md-3">
+      <h4>Negations:</h4>
+      <ul class="list-group my-y-scrollable">
+        <li class="list-group-item" *ngFor="let word of negations">
+          {{word}}
+        </li>
+      </ul>
+    </div>
+
+    <div class="col-md-3">
+      <h4>Polarities:</h4>
+      <div *ngIf="polaritywords">
+      <ul class="list-group my-y-scrollable">
+        <li class="list-group-item" *ngFor="let polarityword of polaritywords">
+          {{polarityword.word}}:
+          <em *ngIf="polarityword.polarity && polarityword.polarity.value>0" style="color:green">POSITIVE</em>
+          <em *ngIf="polarityword.polarity && polarityword.polarity.value==0" style="color:grey">NEUTRAL</em>
+          <em *ngIf="polarityword.polarity && polarityword.polarity.value<0" style="color:red">NEGATIVE</em>
+        </li>
+      </ul>
+    </div>
+    <div *ngIf="polaritywordsLoading">Loading...</div>
+  </div>
+
+    <div class="col-md-3">
+      <h4>Topics:</h4>
+      <ul class="list-group my-y-scrollable">
+        <li class="list-group-item" *ngFor="let topic of topics">
+          <strong>{{topic.topicName}}:</strong> <em *ngFor="let word of topic.topicWords">{{word}} | </em>
+        </li>
+      </ul>
+    </div>
+
+  </div>
+
+</div>
